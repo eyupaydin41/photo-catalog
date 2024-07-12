@@ -142,3 +142,7 @@ dist
 .svelte-kit
 
 .idea/
+
+temp/
+
+*.iml
