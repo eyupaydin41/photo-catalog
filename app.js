@@ -11,9 +11,9 @@ mongoose.connect('mongodb://localhost/pcat-db')
     .catch((err) => console.log("Veritabanına bağlanırken hata oluştu: ", err));
 
 
-app.set("view engine","ejs");
+app.set("view engine", "ejs");
 app.use(express.static(`public`));
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 const port = 3000;
@@ -35,6 +35,14 @@ app.get(`/about`, (req, res) => {
 
 app.get(`/add`, (req, res) => {
     res.render(`add`);
+})
+
+app.get("/photos/:id", async (req, res) => {
+    const photo = await Photo.findById(req.params.id);
+
+    res.render('photo', {
+        photo
+    });
 })
 
 app.post(`/photos`, async (req, res) => {
